@@ -1,238 +1,201 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ramadan Challenge Registration</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap');
+  <title>Ramadan Challenge Registration</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap');
 
-        body { 
-            margin: 0; 
-            padding: 0; 
-            font-family: 'Cairo', Arial, sans-serif; 
-            color: #fff; 
-            text-align: center;
-            background: url('static/ramadan_bg.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
+    body { 
+      margin: 0; 
+      padding: 0; 
+      font-family: 'Cairo', Arial, sans-serif; 
+      color: #fff; 
+      text-align: center;
+      background: url('static/ramadan_bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
 
-        header {
-            position: relative;
-            padding: 20px;
-            text-align: center;
-        }
+    header {
+      padding: 20px;
+      text-align: center;
+    }
 
-        .header-icons {
-            width: 100%;
-            position: absolute;
-            top: 10px;
-            left: 0;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-        }
+    header h1 {
+      font-size: 3em;
+      font-weight: bold;
+      color: #ffdd00;
+      text-shadow: 0 0 10px #ffd700, 0 0 20px #ffbf00;
+    }
 
-        .header-icons img {
-            width: 150px;
-        }
+    header h2 {
+      font-size: 1.5em;
+      color: #fff;
+      text-shadow: 0 0 5px #fffa8b;
+    }
 
-        header h1 {
-            font-size: 3em;
-            font-weight: bold;
-            color: #ffdd00;
-            text-shadow: 0 0 10px #ffd700, 0 0 20px #ffbf00;
-        }
+    main {
+      padding: 20px;
+      backdrop-filter: blur(2px);
+      background-color: rgba(0,0,0,0.25);
+      margin: 20px auto;
+      border-radius: 15px;
+      max-width: 700px;
+    }
 
-        header h2 {
-            font-size: 1.5em;
-            color: #fff;
-            text-shadow: 0 0 5px #fffa8b;
-        }
+    input, select, button { 
+      padding: 10px; 
+      margin: 5px; 
+      border-radius: 5px; 
+      border: none; 
+      font-size: 1em;
+    }
 
-        main {
-            padding: 20px;
-            backdrop-filter: blur(2px);
-            background-color: rgba(0,0,0,0.25);
-            margin: 20px auto;
-            border-radius: 15px;
-            max-width: 600px;
-        }
+    input, select { width: 220px; }
 
-        .details {
-            max-height: 200px;
-            overflow-y: auto;
-            text-align: left;
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
-        }
+    button {
+      background-color: #ff4500;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        input, select, button { 
-            padding: 10px; 
-            margin: 5px; 
-            border-radius: 5px; 
-            border: none; 
-            font-size: 1em;
-        }
+    button:hover { background-color: #ff6347; }
 
-        input, select { width: 220px; }
+    .packages {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 15px 0;
+    }
 
-        button {
-            background-color: #ff4500;
-            color: #fff;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    .pkg {
+      position: relative;
+      margin: 15px;
+      cursor: pointer;
+      text-align: center;
+    }
 
-        button:hover { background-color: #ff6347; }
+    .pkg img { 
+      width: 180px;  /* أكبر حجم */
+      border: 3px solid transparent; 
+      border-radius: 10px;
+      display: block;
+      margin-bottom: 5px;
+    }
 
-        .packages {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 15px 0;
-        }
+    .pkg .checkmark {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 30px;
+      height: 30px;
+      background: url('static/check.png') no-repeat center center;
+      background-size: contain;
+      display: none;
+    }
 
-        .packages .pkg {
-            position: relative;
-            margin: 10px;
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
+    .pkg.selected .checkmark {
+      display: block;
+    }
 
-        .packages .pkg:hover {
-            transform: scale(0.95);
-        }
+    .pkg-name {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-top: 5px;
+    }
 
-        .packages img { 
-            width: 120px; 
-            border: 3px solid transparent; 
-            border-radius: 10px;
-            display: block;
-        }
-
-        .packages .checkmark {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            width: 25px;
-            height: 25px;
-            background: url('static/check.png') no-repeat center center;
-            background-size: contain;
-            display: none;
-        }
-
-        .packages .selected .checkmark {
-            display: block;
-        }
-
-        ul { list-style-type: none; padding: 0; }
-        li { margin: 5px 0; font-size: 1.1em; }
-
-        .message {
-            margin: 10px 0;
-            font-size: 1.2em;
-            color: #00ff99;
-            font-weight: bold;
-        }
-    </style>
+    .message {
+      margin: 10px 0;
+      font-size: 1.2em;
+      color: #00ff99;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
 <header>
-    <div class="header-icons">
-        <img src="static/logo.png" alt="Logo">
-        <img src="static/halal.png" alt="Crescent">
-    </div>
-
-    <h1>Ramadan Challenge</h1>
-    <h2>خطواتك تقوي رمضانك</h2>
+  <h1>Ramadan Challenge</h1>
+  <h2>خطواتك تقوي رمضانك</h2>
 </header>
 
 <main>
-    <div class="details">
-        <p>Duration: 2 weeks | Type: Half Marathon / 5K</p>
-        <p>Goal: Encourage healthy running and competition</p>
+  <form id="regForm">
+    <input type="text" name="entry.1398250687" placeholder="Name" required><br>
+    <input type="date" name="entry.90213137" required><br>
+    <select name="entry.1564933089" required>
+      <option value="">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select><br>
+    <input type="text" name="entry.496641967" placeholder="Phone" required><br>
 
-        <h3>Packages & Prices</h3>
-        <ul>
-          <li>Normal: Certificate + Medal (100E£)</li>
-          <li>Premium: Certificate + Medal + T-shirt (250E£)</li>
-          <li>Elite: Certificate + Medal Holder (400E£)</li>
-          <li>Luxury: Certificate + Medal + T-shirt + Medal Holder (500E£)</li>
-        </ul>
+    <h3>Choose Package</h3>
+    <div class="packages">
+      <div class="pkg" onclick="selectPackage(this,'normal')">
+        <img src="static/normal.png">
+        <div class="checkmark"></div>
+        <div class="pkg-name">NORMAL</div>
+      </div>
+      <div class="pkg" onclick="selectPackage(this,'premium')">
+        <img src="static/premium.png">
+        <div class="checkmark"></div>
+        <div class="pkg-name">PREMIUM</div>
+      </div>
+      <div class="pkg" onclick="selectPackage(this,'elite')">
+        <img src="static/elite.png">
+        <div class="checkmark"></div>
+        <div class="pkg-name">ELITE</div>
+      </div>
+      <div class="pkg" onclick="selectPackage(this,'luxury')">
+        <img src="static/full.png">
+        <div class="checkmark"></div>
+        <div class="pkg-name">LUXURY</div>
+      </div>
     </div>
 
-    <h2>Register Now</h2>
+    <input type="hidden" name="entry.1762459308" id="package" value="normal"><br>
+    <button type="submit">Register</button>
+  </form>
 
-    <!-- iframe مخفي -->
-    <iframe name="hidden_iframe" style="display:none;"></iframe>
-
-    <form id="regForm" method="POST" target="hidden_iframe" action="https://docs.google.com/forms/d/e/1FAIpQLSdQ183G0wzR2fcI59vzomBrO9nCW4sltVBo8dLqEXDIQlyohw/formResponse">
-      Name: <input type="text" name="entry.1398250687" required><br>
-      Date Of Birth: <input type="date" name="entry.90213137" required><br>
-      Gender:
-      <select name="entry.1564933089">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select><br>
-      Phone: <input type="text" name="entry.496641967" required><br>
-
-      <h3>Choose Package</h3>
-      <div class="packages">
-        <div class="pkg" onclick="selectPackage(this,'Normal')">
-            <img src="static/normal.png">
-            <div class="checkmark"></div>
-        </div>
-        <div class="pkg" onclick="selectPackage(this,'Premium')">
-            <img src="static/premium.png">
-            <div class="checkmark"></div>
-        </div>
-        <div class="pkg" onclick="selectPackage(this,'Elite')">
-            <img src="static/elite.png">
-            <div class="checkmark"></div>
-        </div>
-        <div class="pkg" onclick="selectPackage(this,'Luxury')">
-            <img src="static/full.png">
-            <div class="checkmark"></div>
-        </div>
-      </div>
-
-      <input type="hidden" name="entry.1762459308" id="package" value="Normal">
-      <br>
-      <button type="submit">Register</button>
-    </form>
-
-    <p id="msg" class="message"></p>
+  <p id="msg" class="message"></p>
 </main>
 
 <script>
 let selectedPkg = null;
 function selectPackage(pkgDiv, pkgName) {
-    if(selectedPkg) selectedPkg.classList.remove('selected');
-    pkgDiv.classList.add('selected');
-    selectedPkg = pkgDiv;
-    document.getElementById('package').value = pkgName;
+  if(selectedPkg) selectedPkg.classList.remove('selected');
+  pkgDiv.classList.add('selected');
+  selectedPkg = pkgDiv;
+  document.getElementById('package').value = pkgName;
 }
 
-// عرض رسالة بعد الإرسال
-const form = document.getElementById('regForm');
-form.onsubmit = function() {
+// إرسال البيانات مباشرة على Google Form
+const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSdQ183G0wzR2fcI59vzomBrO9nCW4sltVBo8dLqEXDIQlyohw/formResponse";
+
+document.getElementById("regForm").onsubmit = function(e){
+  e.preventDefault();
+  const btn = e.target.querySelector("button");
+  btn.disabled = true;
+  btn.innerText = "جارٍ التسجيل...";
+
+  fetch(googleFormURL, {
+    method: "POST",
+    mode: "no-cors",
+    body: new FormData(this)
+  }).then(() => {
     document.getElementById("msg").innerText = "✅ تم تسجيلك بنجاح!";
-    // إعادة ضبط الفورم واختيار الحزمة
-    setTimeout(() => {
-        form.reset();
-        if(selectedPkg) selectedPkg.classList.remove('selected');
-        selectedPkg = null;
-        document.getElementById("package").value = "Normal";
-    }, 100);
+    e.target.reset();
+    if(selectedPkg) selectedPkg.classList.remove('selected');
+    btn.disabled = false;
+    btn.innerText = "Register";
+  }).catch(() => {
+    document.getElementById("msg").innerText = "❌ حصل خطأ، حاول مرة أخرى";
+    btn.disabled = false;
+    btn.innerText = "Register";
+  });
 };
-</script>
-
-</body>
-</html>
-
 </script>
 
 </body>
