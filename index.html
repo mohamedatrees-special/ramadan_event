@@ -56,7 +56,7 @@
             background-color: rgba(0,0,0,0.25);
             margin: 20px auto;
             border-radius: 15px;
-            max-width: 640px;
+            max-width: 600px;
         }
 
         .details {
@@ -100,6 +100,7 @@
             position: relative;
             margin: 10px;
             transition: transform 0.3s;
+            cursor: pointer;
         }
 
         .packages .pkg:hover {
@@ -108,7 +109,6 @@
 
         .packages img { 
             width: 120px; 
-            cursor: pointer; 
             border: 3px solid transparent; 
             border-radius: 10px;
             display: block;
@@ -166,8 +166,44 @@
         </ul>
     </div>
 
-    <!-- Google Form embedded -->
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdQ183G0wzR2fcI59vzomBrO9nCW4sltVBo8dLqEXDIQlyohw/viewform?embedded=true" width="640" height="1369" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <h2>Register Now</h2>
+
+    <form id="regForm">
+      Name: <input type="text" id="name" required><br>
+      Date Of Birth: <input type="date" id="dob" required><br>
+      Gender:
+      <select id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select><br>
+      Phone: <input type="text" id="phone" required><br>
+
+      <h3>Choose Package</h3>
+      <div class="packages">
+        <div class="pkg" onclick="selectPackage(this,'Normal')">
+            <img src="static/normal.png">
+            <div class="checkmark"></div>
+        </div>
+        <div class="pkg" onclick="selectPackage(this,'Premium')">
+            <img src="static/premium.png">
+            <div class="checkmark"></div>
+        </div>
+        <div class="pkg" onclick="selectPackage(this,'Elite')">
+            <img src="static/elite.png">
+            <div class="checkmark"></div>
+        </div>
+        <div class="pkg" onclick="selectPackage(this,'Luxury')">
+            <img src="static/full.png">
+            <div class="checkmark"></div>
+        </div>
+      </div>
+
+      <input type="hidden" id="package" value="Normal">
+      <br>
+      <button type="submit">Register</button>
+    </form>
+
+    <p id="msg"></p>
 </main>
 
 <script>
@@ -176,8 +212,35 @@ function selectPackage(pkgDiv, pkgName) {
     if(selectedPkg) selectedPkg.classList.remove('selected');
     pkgDiv.classList.add('selected');
     selectedPkg = pkgDiv;
-    document.getElementById('selectedPackage').value = pkgName;
+    document.getElementById('package').value = pkgName;
 }
+
+// رابط الفورم بتاعك على جوجل
+const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSdQ183G0wzR2fcI59vzomBrO9nCW4sltVBo8dLqEXDIQlyohw/formResponse";
+
+document.getElementById("regForm").onsubmit = function(e){
+  e.preventDefault();
+
+  let name = document.getElementById("name").value;
+  let dob = document.getElementById("dob").value;
+  let gender = document.getElementById("gender").value;
+  let phone = document.getElementById("phone").value;
+  let pack = document.getElementById("package").value;
+
+  // إنشاء URL لإرسال البيانات
+  let url = googleFormURL
+      + "?entry.1398250687=" + encodeURIComponent(name)
+      + "&entry.90213137=" + encodeURIComponent(dob)
+      + "&entry.1564933089=" + encodeURIComponent(gender)
+      + "&entry.1762459308=" + encodeURIComponent(pack)
+      + "&entry.496641967=" + encodeURIComponent(phone);
+
+  fetch(url, { mode: "no-cors" }); // no-cors عشان ما تظهرش صفحة Google Form
+
+  document.getElementById("msg").innerHTML = "✅ تم تسجيلك بنجاح!";
+  document.getElementById("regForm").reset();
+  if(selectedPkg) selectedPkg.classList.remove('selected');
+};
 </script>
 
 </body>
