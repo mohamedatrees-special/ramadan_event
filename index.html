@@ -166,15 +166,18 @@
 
     <h2>Register Now</h2>
 
-    <form id="regForm">
-      Name: <input type="text" id="name" required><br>
-      Date Of Birth: <input type="date" id="dob" required><br>
+    <!-- iframe مخفي -->
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+    <form id="regForm" method="POST" target="hidden_iframe" action="https://docs.google.com/forms/d/e/1FAIpQLSdQ183G0wzR2fcI59vzomBrO9nCW4sltVBo8dLqEXDIQlyohw/formResponse">
+      Name: <input type="text" name="entry.1398250687" required><br>
+      Date Of Birth: <input type="date" name="entry.90213137" required><br>
       Gender:
-      <select id="gender">
+      <select name="entry.1564933089">
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select><br>
-      Phone: <input type="text" id="phone" required><br>
+      Phone: <input type="text" name="entry.496641967" required><br>
 
       <h3>Choose Package</h3>
       <div class="packages">
@@ -196,7 +199,7 @@
         </div>
       </div>
 
-      <input type="hidden" id="package" value="Normal">
+      <input type="hidden" name="entry.1762459308" id="package" value="Normal">
       <br>
       <button type="submit">Register</button>
     </form>
@@ -213,41 +216,23 @@ function selectPackage(pkgDiv, pkgName) {
     document.getElementById('package').value = pkgName;
 }
 
-// رابط الفورم على جوجل
-const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSdQ183G0wzR2fcI59vzomBrO9nCW4sltVBo8dLqEXDIQlyohw/formResponse";
-
-document.getElementById("regForm").onsubmit = function(e){
-  e.preventDefault();
-  
-  const btn = e.target.querySelector("button");
-  btn.disabled = true;
-  btn.innerText = "جارٍ التسجيل...";
-
-  const name = document.getElementById("name").value;
-  const dob = document.getElementById("dob").value;
-  const gender = document.getElementById("gender").value;
-  const phone = document.getElementById("phone").value;
-  const pack = document.getElementById("package").value;
-
-  const url = googleFormURL
-      + "?entry.1398250687=" + encodeURIComponent(name)
-      + "&entry.90213137=" + encodeURIComponent(dob)
-      + "&entry.1564933089=" + encodeURIComponent(gender)
-      + "&entry.1762459308=" + encodeURIComponent(pack)
-      + "&entry.496641967=" + encodeURIComponent(phone);
-
-  fetch(url, { mode: "no-cors" }).then(() => {
-      document.getElementById("msg").innerText = "✅ تم تسجيلك بنجاح!";
-      e.target.reset();
-      if(selectedPkg) selectedPkg.classList.remove('selected');
-      btn.disabled = false;
-      btn.innerText = "Register";
-  }).catch(() => {
-      document.getElementById("msg").innerText = "❌ حصل خطأ، حاول مرة أخرى";
-      btn.disabled = false;
-      btn.innerText = "Register";
-  });
+// عرض رسالة بعد الإرسال
+const form = document.getElementById('regForm');
+form.onsubmit = function() {
+    document.getElementById("msg").innerText = "✅ تم تسجيلك بنجاح!";
+    // إعادة ضبط الفورم واختيار الحزمة
+    setTimeout(() => {
+        form.reset();
+        if(selectedPkg) selectedPkg.classList.remove('selected');
+        selectedPkg = null;
+        document.getElementById("package").value = "Normal";
+    }, 100);
 };
+</script>
+
+</body>
+</html>
+
 </script>
 
 </body>
