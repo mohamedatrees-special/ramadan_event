@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Ramadan Challenge Registration</title>
+  <meta charset="UTF-8">
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap');
 
@@ -44,11 +46,11 @@
 
     main {
       padding: 20px;
-      backdrop-filter: blur(2px);
-      background-color: rgba(0,0,0,0.25);
+      backdrop-filter: blur(3px);
+      background-color: rgba(0,0,0,0.35);
       margin: 20px auto;
       border-radius: 15px;
-      max-width: 800px;
+      max-width: 900px;
     }
 
     .details {
@@ -57,6 +59,7 @@
       padding: 10px;
       border: 1px solid rgba(255,255,255,0.2);
       border-radius: 10px;
+      background: rgba(0,0,0,0.3);
     }
 
     input, select, button { 
@@ -67,13 +70,15 @@
       font-size: 1em;
     }
 
-    input, select { width: 220px; }
+    input, select { width: 250px; }
 
     button {
       background-color: #ff4500;
       color: #fff;
       font-weight: bold;
       cursor: pointer;
+      padding: 12px 30px;
+      font-size: 1.2em;
     }
 
     .grid {
@@ -88,11 +93,12 @@
       cursor: pointer;
       text-align: center;
       border-radius: 12px;
-      padding: 5px;
+      padding: 8px;
+      transition: 0.2s;
     }
 
     .card img {
-      width: 230px;
+      width: 260px;
       border-radius: 12px;
       transition: 0.2s;
     }
@@ -103,12 +109,14 @@
 
     .selected {
       border: 3px solid gold;
+      box-shadow: 0 0 15px gold;
     }
 
     .name {
       font-weight: bold;
-      font-size: 1.2em;
-      margin-top: 5px;
+      font-size: 1.3em;
+      margin-top: 8px;
+      color: #ffdd00;
     }
 
   </style>
@@ -124,77 +132,81 @@
 </header>
 
 <main>
+
+  <!-- DETAILS -->
   <div class="details">
-    <p>Duration: ramadan | Type: 50k walking / 100k running / 250k cycling</p>
-    <p>Goal: Encourage healthy running and competition</p>
+    <p><b>Duration:</b> Ramadan | <b>Type:</b> 50k walking / 100k running / 250k cycling</p>
+    <p><b>Goal:</b> Encourage healthy running and competition</p>
 
     <h3>Packages & Prices</h3>
     <ul>
-      <li>Normal: Certificate + Medal (100E£)</li>
-      <li>Premium: Certificate + Medal + T-shirt (250E£)</li>
-      <li>Elite: Certificate + Medal Holder (400E£)</li>
-      <li>Luxury: Certificate + Medal + T-shirt + Medal Holder (500E£)</li>
+      <li>Normal: Certificate + Medal (100 E£)</li>
+      <li>Premium: Certificate + Medal + T-shirt (250 E£)</li>
+      <li>Elite: Certificate + Medal Holder (400 E£)</li>
+      <li>Luxury: Certificate + Medal + T-shirt + Medal Holder (500 E£)</li>
     </ul>
   </div>
 
 <form id="regForm">
 
-  <input type="text" id="name" placeholder="Name" required><br>
+  <input type="text" id="name" placeholder="Full Name" required><br>
   <input type="date" id="dob" required><br>
+
   <select id="gender" required>
-    <option value="">Gender</option>
+    <option value="">Select Gender</option>
     <option value="male">Male</option>
     <option value="female">Female</option>
   </select><br>
-  <input type="text" id="phone" placeholder="Phone" required><br>
 
-  <!-- 🔥 CHALLENGE TYPE -->
+  <input type="text" id="phone" placeholder="Phone Number" required><br>
+
+  <!-- CHALLENGE TYPE -->
   <h2>Choose Challenge Type</h2>
   <div class="grid">
-    <div class="card" onclick="selectChallenge('walking(50k)', this)">
+    <div class="card" onclick="selectChallenge('Walking (50K)', this)">
       <img src="static/walking.png">
       <div class="name">WALKING (50K)</div>
     </div>
 
-    <div class="card" onclick="selectChallenge('running(100k)', this)">
+    <div class="card" onclick="selectChallenge('Running (100K)', this)">
       <img src="static/running.png">
       <div class="name">RUNNING (100K)</div>
     </div>
 
-    <div class="card" onclick="selectChallenge('cycling(250k)', this)">
+    <div class="card" onclick="selectChallenge('Cycling (250K)', this)">
       <img src="static/cycling.png">
       <div class="name">CYCLING (250K)</div>
     </div>
   </div>
 
-  <!-- 🔥 PACKAGES -->
+  <!-- PACKAGES -->
   <h2>Choose Package</h2>
   <div class="grid">
-    <div class="card" onclick="selectPackage('normal', this)">
+    <div class="card" onclick="selectPackage('Normal', this)">
       <img src="static/normal.png">
       <div class="name">NORMAL</div>
     </div>
 
-    <div class="card" onclick="selectPackage('premium', this)">
+    <div class="card" onclick="selectPackage('Premium', this)">
       <img src="static/premium.png">
       <div class="name">PREMIUM</div>
     </div>
 
-    <div class="card" onclick="selectPackage('elite', this)">
+    <div class="card" onclick="selectPackage('Elite', this)">
       <img src="static/elite.png">
       <div class="name">ELITE</div>
     </div>
 
-    <div class="card" onclick="selectPackage('luxury', this)">
+    <div class="card" onclick="selectPackage('Luxury', this)">
       <img src="static/full.png">
       <div class="name">LUXURY</div>
     </div>
   </div>
 
-  <input type="hidden" id="package" value="normal">
-  <input type="hidden" id="challenge" value="walking(50k)">
+  <input type="hidden" id="package" value="Normal">
+  <input type="hidden" id="challenge" value="Walking (50K)">
 
-  <button type="submit">Register</button>
+  <button type="submit">REGISTER</button>
 
 </form>
 
@@ -218,28 +230,30 @@ function selectChallenge(name, div){
   selectedChallenge = div;
 }
 
-// Google Form Prefilled Base
-const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSdQ183G0wzR2fcI59vzomBrO9nCW4sltVBo8dLqEXDIQlyohw/viewform?usp=pp_url";
+// 🔥 Google Form Submit Link
+const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSdQ183G0wzR2fcI59vzomBrO9nCW4sltVBo8dLqEXDIQlyohw/formResponse";
 
 document.getElementById("regForm").onsubmit = function(e){
   e.preventDefault();
 
-  const name = nameInput.value;
-  const dob = dobInput.value;
-  const gender = gender.value;
-  const phone = phone.value;
+  const name = document.getElementById("name").value;
+  const dob = document.getElementById("dob").value;
+  const gender = document.getElementById("gender").value;
+  const phone = document.getElementById("phone").value;
   const pkg = document.getElementById("package").value;
   const challenge = document.getElementById("challenge").value;
 
-  const url = `${formBase}
-&entry.1398250687=${encodeURIComponent(name)}
-&entry.90213137=${encodeURIComponent(dob)}
-&entry.1564933089=${encodeURIComponent(gender)}
-&entry.1762459308=${encodeURIComponent(pkg)}
-&entry.496641967=${encodeURIComponent(phone)}
-&entry.1117190857=${encodeURIComponent(challenge)}`;
+  const url = formBase
+    + "?entry.1398250687=" + encodeURIComponent(name)
+    + "&entry.90213137=" + encodeURIComponent(dob)
+    + "&entry.1564933089=" + encodeURIComponent(gender)
+    + "&entry.1762459308=" + encodeURIComponent(pkg)
+    + "&entry.496641967=" + encodeURIComponent(phone)
+    + "&entry.1117190857=" + encodeURIComponent(challenge);
 
-  window.open(url, "_blank");
+  fetch(url, {mode: "no-cors"});
+
+  alert("✅ Registration Successful!");
 };
 </script>
 
