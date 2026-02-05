@@ -184,11 +184,15 @@ let selectedPkg = null;
 let selectedChallenge = null;
 
 function selectPackage(name, div){
-  document.getElementById("package").value = name;
+  // update selection border
   if(selectedPkg) selectedPkg.classList.remove("selected");
   div.classList.add("selected");
   selectedPkg = div;
+
+  // فورم prefilling
+  pkgValue = name; // نحفظ القيمة في متغير عالمي بدل hidden input
 }
+
 
 function selectChallenge(name, div){
   document.getElementById("challenge").value = name;
