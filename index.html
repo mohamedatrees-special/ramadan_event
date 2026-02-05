@@ -230,10 +230,9 @@ function selectChallenge(name, div){
   selectedChallenge = div;
 }
 
-// 🔥 Google Form Submit Link
-const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSdQ183G0wzR2fcI59vzomBrO9nCW4sltVBo8dLqEXDIQlyohw/formResponse";
+const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSdQ183G0wzR2fcI59vzomBrO9nCW4sltVBo8dLqEXDIQlyohw/viewform?usp=pp_url";
 
-document.getElementById("regForm").onsubmit = function(e){
+document.getElementById("regForm").addEventListener("submit", function(e){
   e.preventDefault();
 
   const name = document.getElementById("name").value;
@@ -244,18 +243,18 @@ document.getElementById("regForm").onsubmit = function(e){
   const challenge = document.getElementById("challenge").value;
 
   const url = formBase
-    + "?entry.1398250687=" + encodeURIComponent(name)
+    + "&entry.1398250687=" + encodeURIComponent(name)
     + "&entry.90213137=" + encodeURIComponent(dob)
     + "&entry.1564933089=" + encodeURIComponent(gender)
     + "&entry.1762459308=" + encodeURIComponent(pkg)
     + "&entry.496641967=" + encodeURIComponent(phone)
     + "&entry.1117190857=" + encodeURIComponent(challenge);
 
-  fetch(url, {mode: "no-cors"});
-
-  alert("✅ Registration Successful!");
-};
+  console.log(url); // DEBUG
+  window.open(url, "_blank");
+});
 </script>
+
 
 </body>
 </html>
