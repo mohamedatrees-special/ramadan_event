@@ -31,9 +31,7 @@
       padding: 0 20px;
     }
 
-    .header-icons img {
-      width: 150px;
-    }
+    .header-icons img { width: 150px; }
 
     header h1 {
       font-size: 3em;
@@ -92,25 +90,14 @@
     }
 
     .card img {
-      width: 250px;
+      width: 230px;
       border-radius: 12px;
       transition: 0.2s;
     }
 
-    .card img:hover {
-      transform: scale(1.05);
-    }
-
-    .selected {
-      border: 3px solid gold;
-    }
-
-    .name {
-      font-weight: bold;
-      font-size: 1.2em;
-      margin-top: 5px;
-    }
-
+    .card img:hover { transform: scale(1.05); }
+    .selected { border: 3px solid gold; }
+    .name { font-weight: bold; font-size: 1.2em; margin-top: 5px; }
   </style>
 </head>
 <body>
@@ -125,7 +112,7 @@
 
 <main>
   <div class="details">
-    <p>Duration: Ramadan | Type: 50k walking / 100k running / 250k cycling</p>
+    <p>Duration: ramadan | Type: 50k walking / 100k running / 250k cycling</p>
     <p>Goal: Encourage healthy running and competition</p>
 
     <h3>Packages & Prices</h3>
@@ -137,67 +124,59 @@
     </ul>
   </div>
 
-<form id="regForm">
+  <form id="regForm">
+    <input type="text" id="name" placeholder="Name" required><br>
+    <input type="date" id="dob" required><br>
+    <select id="gender" required>
+      <option value="">Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select><br>
+    <input type="text" id="phone" placeholder="Phone" required><br>
 
-  <input type="text" id="name" placeholder="Name" required><br>
-  <input type="date" id="dob" required><br>
-  <select id="gender" required>
-    <option value="">Gender</option>
-    <option value="male">Male</option>
-    <option value="female">Female</option>
-  </select><br>
-  <input type="text" id="phone" placeholder="Phone" required><br>
-
-  <!-- 🔥 CHALLENGE TYPE -->
-  <h2>Choose Challenge Type</h2>
-  <div class="grid">
-    <div class="card" onclick="selectChallenge('walking(50)', this)">
-      <img src="static/walking.png">
-      <div class="name">WALKING (50K)</div>
+    <!-- Challenge Type -->
+    <h2>Choose Challenge Type</h2>
+    <div class="grid">
+      <div class="card" onclick="selectChallenge('walking(50)', this)">
+        <img src="static/walking.png">
+        <div class="name">WALKING (50)</div>
+      </div>
+      <div class="card" onclick="selectChallenge('running(100)', this)">
+        <img src="static/running.png">
+        <div class="name">RUNNING (100)</div>
+      </div>
+      <div class="card" onclick="selectChallenge('cycling(250)', this)">
+        <img src="static/cycling.png">
+        <div class="name">CYCLING (250)</div>
+      </div>
     </div>
 
-    <div class="card" onclick="selectChallenge('running(100)', this)">
-      <img src="static/running.png">
-      <div class="name">RUNNING (100K)</div>
+    <!-- Packages -->
+    <h2>Choose Package</h2>
+    <div class="grid">
+      <div class="card" onclick="selectPackage('normal', this)">
+        <img src="static/normal.png">
+        <div class="name">NORMAL</div>
+      </div>
+      <div class="card" onclick="selectPackage('premium', this)">
+        <img src="static/premium.png">
+        <div class="name">PREMIUM</div>
+      </div>
+      <div class="card" onclick="selectPackage('elite', this)">
+        <img src="static/elite.png">
+        <div class="name">ELITE</div>
+      </div>
+      <div class="card" onclick="selectPackage('luxury', this)">
+        <img src="static/full.png">
+        <div class="name">LUXURY</div>
+      </div>
     </div>
 
-    <div class="card" onclick="selectChallenge('cycling(250)', this)">
-      <img src="static/cycling.png">
-      <div class="name">CYCLING (250K)</div>
-    </div>
-  </div>
+    <input type="hidden" id="package" value="normal">
+    <input type="hidden" id="challenge" value="walking(50)">
 
-  <!-- 🔥 PACKAGES -->
-  <h2>Choose Package</h2>
-  <div class="grid">
-    <div class="card" onclick="selectPackage('Normal', this)">
-      <img src="static/normal.png">
-      <div class="name">NORMAL</div>
-    </div>
-
-    <div class="card" onclick="selectPackage('Premium', this)">
-      <img src="static/premium.png">
-      <div class="name">PREMIUM</div>
-    </div>
-
-    <div class="card" onclick="selectPackage('Elite', this)">
-      <img src="static/elite.png">
-      <div class="name">ELITE</div>
-    </div>
-
-    <div class="card" onclick="selectPackage('Luxury', this)">
-      <img src="static/full.png">
-      <div class="name">LUXURY</div>
-    </div>
-  </div>
-
-  <input type="hidden" id="package" value="Normal">
-  <input type="hidden" id="challenge" value="walking(50)">
-
-  <button type="submit">Register</button>
-
-</form>
-
+    <button type="submit">Register</button>
+  </form>
 </main>
 
 <script>
@@ -218,7 +197,7 @@ function selectChallenge(name, div){
   selectedChallenge = div;
 }
 
-// Google Form Prefilled Base
+// Prefill Google Form
 const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSdQ183G0wzR2fcI59vzomBrO9nCW4sltVBo8dLqEXDIQlyohw/viewform?usp=pp_url";
 
 document.getElementById("regForm").addEventListener("submit", function(e){
@@ -231,6 +210,7 @@ document.getElementById("regForm").addEventListener("submit", function(e){
   const pkg = document.getElementById("package").value;
   const challenge = document.getElementById("challenge").value;
 
+  // ⚠️ القيم مطابقة للفورم تماماً
   const url = formBase
     + "&entry.1398250687=" + encodeURIComponent(name)
     + "&entry.90213137=" + encodeURIComponent(dob)
@@ -239,7 +219,8 @@ document.getElementById("regForm").addEventListener("submit", function(e){
     + "&entry.496641967=" + encodeURIComponent(phone)
     + "&entry.1117190857=" + encodeURIComponent(challenge);
 
-  window.location.href = url; // الفورم يفتح مع البيانات متعبية
+  // افتح الفورم في تبويب جديد متملّى
+  window.open(url, "_blank");
 });
 </script>
 
