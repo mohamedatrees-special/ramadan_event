@@ -16,8 +16,23 @@
     }
 
     header {
+      position: relative;
       padding: 20px;
       text-align: center;
+    }
+
+    .header-icons {
+      width: 100%;
+      position: absolute;
+      top: 10px;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .header-icons img {
+      width: 150px;
     }
 
     header h1 {
@@ -40,6 +55,16 @@
       margin: 20px auto;
       border-radius: 15px;
       max-width: 700px;
+    }
+
+    .details {
+      max-height: 200px;
+      overflow-y: auto;
+      text-align: left;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
     }
 
     input, select, button { 
@@ -76,7 +101,7 @@
     }
 
     .pkg img { 
-      width: 220px;  /* أكبر حجم */
+      width: 220px;
       border-radius: 10px;
       display: block;
       margin-bottom: 5px;
@@ -104,11 +129,28 @@
 <body>
 
 <header>
+  <div class="header-icons">
+      <img src="static/logo.png" alt="Logo">
+      <img src="static/halal.png" alt="Crescent">
+  </div>
   <h1>Ramadan Challenge</h1>
   <h2>خطواتك تقوي رمضانك</h2>
 </header>
 
 <main>
+  <div class="details">
+    <p>Duration: ramadan | Type: 50k walking / 100k running / 250k cycling</p>
+    <p>Goal: Encourage healthy running and competition</p>
+
+    <h3>Packages & Prices</h3>
+    <ul>
+      <li>Normal: Certificate + Medal (100E£)</li>
+      <li>Premium: Certificate + Medal + T-shirt (250E£)</li>
+      <li>Elite: Certificate + Medal Holder (400E£)</li>
+      <li>Luxury: Certificate + Medal + T-shirt + Medal Holder (500E£)</li>
+    </ul>
+  </div>
+
   <form id="regForm">
     <input type="text" id="name" placeholder="Name" required><br>
     <input type="date" id="dob" required><br>
